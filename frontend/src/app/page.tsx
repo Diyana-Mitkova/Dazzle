@@ -1,5 +1,6 @@
 import Image from "next/image";
-import TextBox from "../components/text-box/TextBox";
+import TextSection from "../components/text-section/TextSection";
+import PreviewSection from "../components/preview-section/PrevewSection";
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
         src="/header.webp"
         className="rounded-xl"
       />
-      <TextBox />
+      <TextSection />
+      <PreviewSection/>
     </div>
   );
 }
