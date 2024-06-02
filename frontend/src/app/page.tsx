@@ -1,6 +1,8 @@
 import Image from "next/image";
 import TextSection from "../components/text-section/TextSection";
+import ProductsSection from "../components/products-section/ProductsSection";
 import PreviewSection from "../components/preview-section/PrevewSection";
+
 
 export default function Home() {
   return (
@@ -13,7 +15,9 @@ export default function Home() {
         className="rounded-xl"
       />
       <TextSection />
+      <ProductsSection/>
       <PreviewSection/>
+    
     </div>
   );
 }
