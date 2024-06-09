@@ -3,7 +3,7 @@ import Link from "next/link";
 
 type PropTypes = {
   name: string;
-  slug: string;
+  slug: string | number;
   price: number;
   image?: string;
 };

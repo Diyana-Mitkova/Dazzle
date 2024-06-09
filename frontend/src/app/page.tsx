@@ -4,7 +4,11 @@ import ProductsSection from "../components/products-section/ProductsSection";
 import PreviewSection from "../components/preview-section/PrevewSection";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const res = await fetch("http://localhost:3000/api/jewelry", { cache: 'no-store' }); // Make sure to use the correct URL
+  const jewelry = await res.json();
+
   return (
     <div className="flex flex-col gap-10">
       <Image
@@ -15,7 +19,7 @@ export default function Home() {
         className="rounded-xl"
       />
       <TextSection />
-      <ProductsSection/>
+      <ProductsSection products={jewelry}  />
       <PreviewSection/>
     
     </div>

@@ -1,8 +1,13 @@
+import ProductsSection from "@/src/components/products-section/ProductsSection";
 
 
-export default function Jewelry() {
+export default async function Jewelry() {
+
+  const res = await fetch("http://localhost:3000/api/jewelry", { cache: 'no-store' }); // Make sure to use the correct URL
+  const jewelry = await res.json();
+
     return (
-    <div>Jewelry-page</div>
+      <ProductsSection products={jewelry} withTitle={false} />
     );
   }
   
