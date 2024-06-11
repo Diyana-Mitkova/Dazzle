@@ -1,13 +1,10 @@
-import ProductsSection from "@/src/components/products-section/ProductsSection";
-
+import AdminTable from "@/src/components/admin-table/AdminTable";
 
 export default async function Admin() {
-
-  const res = await fetch("http://localhost:3000/api/jewelry", { cache: 'no-store' }); // Make sure to use the correct URL
+  const res = await fetch("http://localhost:3000/api/jewelry", {
+    cache: "no-store",
+  });
   const jewelry = await res.json();
 
-    return (
-      <ProductsSection products={jewelry} withTitle={false} />
-    );
-  }
-  
+  return <AdminTable products={jewelry} />;
+}
