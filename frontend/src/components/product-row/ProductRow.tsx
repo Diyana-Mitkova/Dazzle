@@ -3,17 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 type PropTypes = {
+  id: number;
   name: string;
   slug: string | number;
   price: number;
   image?: string;
+  handleDelete:(id: number)=>Promise<void>;
 };
 
 export default function ProductRow({
+  id ,
   name = "missing name",
   slug = "/",
   price = 0,
   image,
+  handleDelete
 }: PropTypes) {
   return (
     <div className="bg-white border flex flex-row items-center justify-between p-3 border-gray-300 rounded-2xl hover:bg-pink-50">
@@ -40,7 +44,7 @@ export default function ProductRow({
         <button className="p-2 rounded-full bg-gray-100 hover:bg-pink-200 hover:text-pink-600">
           <Pen className="w-4 h-4" />
         </button>
-        <button className="p-2 rounded-full bg-gray-100 hover:bg-pink-200 hover:text-pink-600">
+        <button onClick={()=>handleDelete(id)} className="p-2 rounded-full bg-gray-100 hover:bg-pink-200 hover:text-pink-600">
           <Trash2 className="w-4 h-4" />
         </button>
       </div>
