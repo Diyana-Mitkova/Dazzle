@@ -15,11 +15,11 @@ export class JewelryController{
         return await this.jewelryModel.deleteJewelryById(id);
     }
 
-    async createJewelry({ name, description, price }:{name: string, description: string, price: number}) {
-        return await this.jewelryModel.createJewelry({name,description,price});
+    async createJewelry({ name, description, price,image_src}:{name: string, description: string, price: number,image_src: string}) {
+        return await this.jewelryModel.createJewelry({name,description,price,image_src});
     }
 
-    async updateJewelry(id: number, name: string, description: string, price: number) {
-        return await this.jewelryModel.updateJewelry(id, name,description,price);
+    async updateJewelry(id: number, name: string, description: string, price: number ,image_src: string) {
+        return await this.jewelryModel.updateJewelry(id, name,description,price ,image_src);
     }
 }

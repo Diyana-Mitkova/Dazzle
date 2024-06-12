@@ -34,14 +34,14 @@ jewelryRouter.delete("/jewelry", async (req: Request, res: Response) => {
 });
 
 jewelryRouter.post("/jewelry", async (req: Request, res: Response) => {
-    const { name, description, price } = req.body;
+    const { name, description, price, image_src } = req.body;
   
-    if (!name || !description || typeof price !== "number") {
-      return res.status(400).send({ error: "Name, description, and price are required" });
+    if (!name || !description || typeof price !== "number" || !image_src) {
+      return res.status(400).send({ error: "Name, description,price and image_src are required" });
     }
   
     try {
-      const newJewelry = await jewelryController.createJewelry({ name, description, price });
+      const newJewelry = await jewelryController.createJewelry({ name, description, price , image_src});
       res.status(201).send({ message: "Jewelry item created successfully.", jewelry: newJewelry });
     } catch (error) {
       res.status(500).send({ error: "An error occurred while creating the jewelry item." });
@@ -50,14 +50,14 @@ jewelryRouter.post("/jewelry", async (req: Request, res: Response) => {
 
   jewelryRouter.put("/jewelry/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, description, price } = req.body;
+    const { name, description, price ,image_src} = req.body;
   
-    if (!name || !description || typeof price !== "number") {
-      return res.status(400).send({ error: "Name, description, and price are required" });
+    if (!name || !description || typeof price !== "number" || !image_src) {
+      return res.status(400).send({ error: "Name, description, price and image_srcare required" });
     }
   
     try {
-      const updatedJewelry = await jewelryController.updateJewelry(Number(id), name, description, price);
+      const updatedJewelry = await jewelryController.updateJewelry(Number(id), name, description, price,image_src);
       if (updatedJewelry) {
         res.send({ message: "Jewelry item updated successfully.", jewelry: updatedJewelry });
       } else {
