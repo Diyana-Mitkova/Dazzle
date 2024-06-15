@@ -2,6 +2,7 @@
 import { useState } from "react";
 import ProductRow from "../product-row/ProductRow";
 import { Plus } from "lucide-react";
+import CreateProductPopup from "../create-product-popup/CreateProductPopup";
 
 type ProductTypes = {
   id: number;
@@ -17,6 +18,7 @@ type PropTypes = {
 
 export default function AdminTable({ products }: PropTypes) {
   const [jewelry, setJewelry] = useState(products);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleDelete = async (id: number) => {
     try {
@@ -33,10 +35,16 @@ export default function AdminTable({ products }: PropTypes) {
   };
   
 
+
+  const handleClose = () => {
+    setIsPopupOpen(false) 
+  }
+
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-row my-5 justify-end">
-        <button className="flex flex-row items-center rounded-full gap-1 p-2 bg-gray-100 px-4 pl-2 hover:bg-gray-200">
+        <button onClick={()=>setIsPopupOpen(true)} className="flex flex-row items-center rounded-full gap-1 p-2 bg-gray-100 px-4 pl-2 hover:bg-gray-200">
           <Plus className="w-4 h-4"/> Add new product
         </button>
       </div>
@@ -53,6 +61,8 @@ export default function AdminTable({ products }: PropTypes) {
           />
         );
       })}
+     { isPopupOpen && <CreateProductPopup closeIt={handleClose}/>}
+     
     </div>
   );
 }
