@@ -7,7 +7,7 @@ type PropTypes = {
   name: string;
   slug: string | number;
   price: number;
-  image?: string;
+  image: string;
   handleDelete:(id: number)=>Promise<void>;
 };
 
@@ -30,7 +30,7 @@ export default function ProductRow({
             width={1200}
             height={620}
             alt="header image"
-            src="/header.webp"
+            src={image}
             className="h-14 w-14 min-w-14 object-cover  rounded-xl"
           />
 

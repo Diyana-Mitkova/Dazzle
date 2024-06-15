@@ -9,7 +9,7 @@ type ProductTypes = {
   name: string;
   slug: string | number;
   price: number;
-  image?: string;
+  image_src: string;
 };
 
 type PropTypes = {
@@ -17,8 +17,9 @@ type PropTypes = {
 };
 
 export default function AdminTable({ products }: PropTypes) {
-  const [jewelry, setJewelry] = useState(products);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  console.log(products);
+  const [jewelry, setJewelry] = useState<ProductTypes[]>(products);
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 
   const handleDelete = async (id: number) => {
     try {
@@ -49,16 +50,10 @@ export default function AdminTable({ products }: PropTypes) {
     imageURL: string;
   }) => {
     try {
-      console.log({
-        name,
-        description,
-        price,
-        image_src: imageURL,
-      })
-      const response = await fetch(`http://localhost:3000/api/jewelry`, {
+      const response: any = await fetch(`http://localhost:3000/api/jewelry`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name,
@@ -70,11 +65,22 @@ export default function AdminTable({ products }: PropTypes) {
       if (!response.ok) {
         throw new Error(`Error creating product with name ${name}`);
       }
-      console.log(response);
+      const data = await response.json();
+
+      setJewelry([
+        ...jewelry,
+        {
+          name: data.jewelry.name,
+          id: Number(data.jewelry.id),
+          slug: `/${data.jewelry.id}`,
+          price: Number(data.jewelry.price),
+          image_src: data.jewelry.image_src,
+        },
+      ]);
+      setIsPopupOpen(false);
     } catch (error) {
       console.error("Failed to crate the product:", error);
     }
-    
   };
 
   const handleClose = () => {
@@ -99,12 +105,14 @@ export default function AdminTable({ products }: PropTypes) {
             name={product.name}
             price={product.price}
             slug={product.slug}
-            image={product.image}
+            image={product.image_src}
             handleDelete={handleDelete}
           />
         );
       })}
-      {isPopupOpen && <CreateProductPopup closeIt={handleClose} handleCreate={handleCreate} />}
+      {isPopupOpen && (
+        <CreateProductPopup closeIt={handleClose} handleCreate={handleCreate} />
+      )}
     </div>
   );
 }

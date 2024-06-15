@@ -1,5 +1,4 @@
-import ProductsSection from "@/src/components/products-section/ProductsSection";
-
+import ProductsGrid from "@/src/components/products-grid/ProductsGrid";
 
 export default async function Jewelry() {
 
@@ -7,7 +6,7 @@ export default async function Jewelry() {
   const jewelry = await res.json();
 
     return (
-      <ProductsSection products={jewelry} withTitle={false} />
+      <ProductsGrid products={jewelry} />
     );
   }
   

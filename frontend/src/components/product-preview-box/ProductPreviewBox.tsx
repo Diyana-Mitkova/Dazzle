@@ -5,7 +5,7 @@ type PropTypes = {
   name: string;
   slug: string | number;
   price: number;
-  image?: string;
+  image: string;
 };
 
 export default function ProductPreviewBox({
@@ -24,7 +24,7 @@ export default function ProductPreviewBox({
         width={1200}
         height={620}
         alt="header image"
-        src="/header.webp"
+        src={image}
         className="h-48 w-48 min-w-48 object-cover  rounded-xl"
       />
       <div className="flex flex-col gap-3 max-w-48">
