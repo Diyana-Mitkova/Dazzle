@@ -22,7 +22,7 @@ export default function ProductRow({
   return (
     <div className="bg-white border flex flex-row items-center justify-between p-3 border-gray-300 rounded-2xl hover:bg-pink-50">
       <Link
-        href={`/jewelry/${slug}`}
+        href={`/jewelry/${id}`}
         className="max-w-fit flex flex-row gap-5  items-center"
       >
         <div className="flex flex-row gap-5 items-center">
