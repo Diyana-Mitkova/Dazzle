@@ -35,13 +35,14 @@ jewelryRouter.delete("/jewelry", async (req: Request, res: Response) => {
 
 jewelryRouter.post("/jewelry", async (req: Request, res: Response) => {
     const { name, description, price, image_src } = req.body;
+    console.log(req)
   
-    if (!name || !description || typeof price !== "number" || !image_src) {
-      return res.status(400).send({ error: "Name, description,price and image_src are required" });
+    if (!name || !description || !price || !image_src) {
+      return res.status(400).send({ error: `Name, description, price and image_src are required ${name}, ${description}, ${price}, ${image_src}` });
     }
   
     try {
-      const newJewelry = await jewelryController.createJewelry({ name, description, price , image_src});
+      const newJewelry = await jewelryController.createJewelry({ name, description, price: Number(price) , image_src});
       res.status(201).send({ message: "Jewelry item created successfully.", jewelry: newJewelry });
     } catch (error) {
       res.status(500).send({ error: "An error occurred while creating the jewelry item." });
