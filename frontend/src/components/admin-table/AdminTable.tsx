@@ -3,23 +3,35 @@ import { useState } from "react";
 import ProductRow from "../product-row/ProductRow";
 import { Plus } from "lucide-react";
 import CreateProductPopup from "../create-product-popup/CreateProductPopup";
+import EditProductPopup from "../edit-product-popup/EditProductPopup";
+
+type Jewelry = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image_src: string;
+};
 
 type ProductTypes = {
   id: number;
   name: string;
+  description: string;
   slug: string | number;
   price: number;
   image_src: string;
 };
 
 type PropTypes = {
-  products: ProductTypes[];
+  products: Jewelry[];
 };
 
 export default function AdminTable({ products }: PropTypes) {
-  console.log(products);
-  const [jewelry, setJewelry] = useState<ProductTypes[]>(products);
+  const [jewelry, setJewelry] = useState<Jewelry[]>(products);
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [selectEditProduct, setSelectedEditProduct] = useState<Jewelry | null>(
+    null
+  );
 
   const handleDelete = async (id: number) => {
     try {
@@ -72,9 +84,9 @@ export default function AdminTable({ products }: PropTypes) {
         {
           name: data.jewelry.name,
           id: Number(data.jewelry.id),
-          slug: `/${data.jewelry.id}`,
           price: Number(data.jewelry.price),
           image_src: data.jewelry.image_src,
+          description: data.jewelry.description,
         },
       ]);
       setIsPopupOpen(false);
@@ -83,8 +95,56 @@ export default function AdminTable({ products }: PropTypes) {
     }
   };
 
+  const handleEdit = async ({
+    id,
+    name,
+    description,
+    price,
+    image_src,
+  }: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image_src: string;
+  }) => {
+    try {
+      const response: any = await fetch(`http://localhost:3000/api/jewelry/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          description,
+          price: Number(price),
+          image_src,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`Error creating product with name ${name}`);
+      }
+      const data = await response.json();
+
+      setJewelry((prevJewelry) => 
+        prevJewelry.map((item) => (item.id === id ? data.jewelry : item))
+      );
+      
+      setSelectedEditProduct(null);
+    } catch (error) {
+      console.error("Failed to crate the product:", error);
+    }
+  };
+
   const handleClose = () => {
     setIsPopupOpen(false);
+  };
+  const handleEditOpen = (product: Jewelry) => {
+    setSelectedEditProduct(product);
+  };
+
+  const handleCloseEdit = () => {
+    setSelectedEditProduct(null);
   };
 
   return (
@@ -101,17 +161,21 @@ export default function AdminTable({ products }: PropTypes) {
         return (
           <ProductRow
             key={index}
-            id={product.id}
-            name={product.name}
-            price={product.price}
-            slug={product.slug}
-            image={product.image_src}
+            product={product}
             handleDelete={handleDelete}
+            handleEditOpen={handleEditOpen}
           />
         );
       })}
       {isPopupOpen && (
         <CreateProductPopup closeIt={handleClose} handleCreate={handleCreate} />
+      )}
+      {selectEditProduct && (
+        <EditProductPopup
+          closeIt={handleCloseEdit}
+          handleEdit={handleEdit}
+          product={selectEditProduct}
+        />
       )}
     </div>
   );

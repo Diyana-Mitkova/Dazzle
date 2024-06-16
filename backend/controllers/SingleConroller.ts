@@ -1,4 +1,4 @@
-import { SingleModel } from "../models/singleModel";
+import { SingleModel } from "../models/SingleModel";
 
 export class SingleController{
     private singleModel: SingleModel;

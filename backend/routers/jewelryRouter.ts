@@ -53,7 +53,7 @@ jewelryRouter.post("/jewelry", async (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, description, price ,image_src} = req.body;
   
-    if (!name || !description || typeof price !== "number" || !image_src) {
+    if (!name || !description || !price  || !image_src) {
       return res.status(400).send({ error: "Name, description, price and image_srcare required" });
     }
   

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { SingleController } from "../controllers/singleConroller";
+import { SingleController } from "../controllers/SingleConroller";
 
 export const singleRouter = Router();
 
