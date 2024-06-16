@@ -7,7 +7,7 @@ export default function PreviewSection() {
         <h2 className="text-4xl font-bold">BE LOVE с Dazzle</h2>
         <p>
           Повикай любовта! Вдъхнови се от любовта! Излъчвай любовта! Копней за
-          любовта! Бъди любовта с новите модели на Pandora!
+          любовта! Бъди любовта с новите модели на Dazzle !
         </p>
       </div>
 
@@ -15,7 +15,7 @@ export default function PreviewSection() {
         width={1200}
         height={620}
         alt="header image"
-        src="/header.webp"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmuNQ9r_jkSCJKqbzAioesxXqVvN8irDDtpQ&s"
         className="h-50 w-80 object-cover  rounded-xl"
       />
     </div>
