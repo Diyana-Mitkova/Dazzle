@@ -13,15 +13,6 @@ type Jewelry = {
   image_src: string;
 };
 
-type ProductTypes = {
-  id: number;
-  name: string;
-  description: string;
-  slug: string | number;
-  price: number;
-  image_src: string;
-};
-
 type PropTypes = {
   products: Jewelry[];
 };

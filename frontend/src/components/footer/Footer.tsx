@@ -6,15 +6,11 @@ const Footer = () => {
     sections: [
       {
         title: 'Dazzle',
-        links: ['За нас'],
+        links: ['About Us'],
         href:"/about-us"
       },
     
-      {
-        title: 'Свържи се с нас',
-        links: ['Контакти'],
-        href:"/contact-us"
-      },
+      
     ],
   };
  
