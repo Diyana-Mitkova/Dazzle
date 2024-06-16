@@ -1,4 +1,4 @@
-import { ShoppingBag } from "lucide-react";
+import { BookUser } from "lucide-react";
 import Link from "next/link";
 
 export default function Nav() {
@@ -23,14 +23,7 @@ export default function Nav() {
               Jewelry
             </Link>
           </li>
-          <li>
-            <Link
-              href="/contact-us"
-              className="block py-2 px-3 text-slate-400 hover:text-pink-600"
-            >
-              ContactUs
-            </Link>
-          </li>
+
           <li>
             {" "}
             <Link
@@ -42,7 +35,11 @@ export default function Nav() {
           </li>
         </ul>
         <div>
-          <ShoppingBag className="cursor-pointer text-slate-400 hover:text-pink-600"/>
+          <Link
+          href={"/admin"}>
+          <BookUser  className="cursor-pointer text-slate-400 hover:text-pink-600" />
+          </Link>
+        
         </div>
       </div>
     </nav>
